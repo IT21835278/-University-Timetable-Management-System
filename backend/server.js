@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser")
 
 //router imports
 const UserRoutes = require("./router/UserRoutes")
+const CourseRoutes = require("./router/CourseRoues")
 
 
 const app = express();
@@ -32,6 +33,7 @@ app.use(cors(
 
 //route
 app.use("/api/user",UserRoutes)
+app.use("/api/course",CourseRoutes)
 
 
 

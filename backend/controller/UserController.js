@@ -11,7 +11,7 @@ const genarateToken = (id) =>{
 
 //registering user
 const registerUser = asyncHandler (async(req,res) =>{
-    const {userId,name,email,password,phone,usertype} = req.body
+    const {userId,name,email,password,phone,usertype,faculty} = req.body
     //validation
     if(!name || !email || !password){
         res.status(400)
@@ -38,7 +38,8 @@ const registerUser = asyncHandler (async(req,res) =>{
             email,
             password,
             phone,
-            usertype
+            usertype,
+            faculty
     })
 
      //Genarate token
@@ -55,7 +56,7 @@ const registerUser = asyncHandler (async(req,res) =>{
      })
 
     if(user){
-        const {_id, name,userID, email, password,phone,usertype, token} =user
+        const {_id, name,userID, email, password,phone,usertype,faculty, token} =user
         res.status(201).json(
             {
                 _id,
@@ -65,6 +66,7 @@ const registerUser = asyncHandler (async(req,res) =>{
                 password,
                 phone,
                 usertype,
+                faculty,
                 token,
                 
             }
@@ -116,7 +118,7 @@ const loginUser = asyncHandler(
         console.log(token);
 
         if(user &&  passwordIsCorrect){
-            const {_id, name,userID, email, password,phone,usertype, token}=user
+            const {_id, name,userID, email, password,phone,usertype,faculty, token}=user
             res.status(200).json(
             {
                 _id,
@@ -127,6 +129,7 @@ const loginUser = asyncHandler(
                 phone,
                 usertype,
                 token,
+                faculty
                 
             }
            

@@ -33,12 +33,18 @@ const UserSchema = mongoose.Schema(
         phone: {
             type: String,
             default: "+94XXXXXXX"
-        }, 
+        },
+
+        faculty:{
+            type:String,
+            default:"none"
+        },
 
         usertype:{
             type:String,
             default:"Student"
         }
+        
     },
 
     {
