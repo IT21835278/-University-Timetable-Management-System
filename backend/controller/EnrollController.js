@@ -48,10 +48,28 @@ const getAllEnroll = asyncHandler(async(req,res)=>{
     }
 })
 
+const deleteEnrollmennt = asyncHandler (async(req,res)=>{
+    try{
+        const tableid = req.params.tableid
+        const  existEnroll = await Enroll.findById(tableid);
+        if(!existEnroll){
+            throw new Error("This details not in databae");
 
+        }
+
+        await Enroll.deleteOne({_id:tableid});
+        res.status(200).json({ message: 'Enrollment deleted successfully' })
+
+
+    }catch (error) {
+    console.error("Error occur delete Enrolls", error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+})
 
 
 module.exports={
     EnrollCourse,
     getAllEnroll,
+    deleteEnrollmennt,
 }
