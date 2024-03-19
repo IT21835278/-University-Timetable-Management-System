@@ -2,7 +2,7 @@ import axios from "axios"
 import {toast} from "react-toastify"
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
-//pay bill
+
 export const CreateCourse = async(formData)=>{
     try{
         const responce = await axios.post(`${BACKEND_URL}/api/course/`,formData)

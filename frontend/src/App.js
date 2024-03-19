@@ -3,6 +3,7 @@ import AdminLayout from "./components/Layout/AdminLayout";
 import AddCourse from "./pages/Admin/AddCourse";
 import CourseTable from "./pages/Admin/CourseTable";
 import CourseUpdate from "./pages/Admin/CourseUpdate";
+import Createtimetable from "./pages/Admin/time-table/create-timetable";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<AdminLayout><AddCourse/></AdminLayout>}/>
         <Route path="/cource-table" element={<AdminLayout><CourseTable/></AdminLayout>}/>
         <Route path="/cource-update/:courseid" element={<AdminLayout><CourseUpdate/></AdminLayout>}/>
+        <Route path="/create-timetable" element={<AdminLayout><Createtimetable/></AdminLayout>}/>
 
       </Routes>
     

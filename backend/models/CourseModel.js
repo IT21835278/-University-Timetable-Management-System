@@ -24,6 +24,10 @@ const CourceSchema= mongoose.Schema(
             type:String,
         },
 
+        lecturer:[{
+            trype:String
+        }]
+
         
 
 
