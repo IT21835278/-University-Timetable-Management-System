@@ -3,7 +3,7 @@ const Course = require("../models/CourseModel")
 
 const CreateCourse =asyncHandler(async(req,res)=>{
 try{
-    const {name,code,description,credit,faculty,lecturer} = req.body
+    const {name,code,description,credit,faculty,lecturer,sesmester,acYear} = req.body
 
     const courseExist = await Course.findOne({code})
     if(courseExist){
@@ -18,9 +18,11 @@ try{
         credit,
         faculty,
         lecturer,
+        sesmester,
+        acYear
     })
     console.log("Added");
-    res.status(200).json(course)
+    res.status(201).json(course)
 
 
 }catch (error) {

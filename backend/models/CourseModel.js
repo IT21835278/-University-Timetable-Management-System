@@ -26,7 +26,15 @@ const CourceSchema= mongoose.Schema(
 
         lecturer:[{
             trype:String
-        }]
+        }],
+
+        semester:{
+            type:String
+        },
+
+        acYear:{
+            type:String
+        }
 
         
 

@@ -5,19 +5,24 @@ const Enroll = require("../models/EnrollModule");
 const EnrollCourse = asyncHandler(async(req,res)=>{
     try{
         const {
-            studentid,
+            Sid,
             semester,
             acYear,
             faculty
 
         }=req.body
+
+        const exisiting = await Enroll.findOne({Sid,semester,acYear})
+        if(exisiting){
+            throw new Error ("You are allready Enroll.")
+        }
         
         console.log(acYear);
-        const userdetails =req.user._id
+        const refid = req.user._id
 
         const enroll = await Enroll.create({
-            userdetails,
-            studentid,
+            refid,
+            Sid,
             semester,
             acYear,
             faculty

@@ -2,38 +2,29 @@ const mongoose = require("mongoose");
 
 const EnrollSchema= mongoose.Schema(
     {
-        userdetails:{
-                type: mongoose.Schema.Types.ObjectId,
-                required:true,
-                ref:"User",
+        refid: {
+            type: String,
+            required: true
         },
-
-        studentid:{
-            type:String,
+        Sid: {
+            type: String,
+            required: true
         },
-
-        semester:{
-            type:Number,
-
+        semester: {
+            type: Number
         },
-
-        acYear:{
-            type:Number
+        acYear: {
+            type: Number
         },
-
-        faculty:{
-            type:String
+        faculty: {
+            type: String
         }
-
-        
-
-
     },
-
     {
-        timestamps:true
+        timestamps: true
     }
 );
+
 
 
 
