@@ -134,7 +134,6 @@ const loginUser = asyncHandler(
             }
            
         )
-        console.log(token);
             
         }else{
             res.status(400)

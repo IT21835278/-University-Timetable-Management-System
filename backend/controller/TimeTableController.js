@@ -253,6 +253,7 @@ const getUserSpecificTimetable =asyncHandler(async(req,res)=>{
     try{
 
         const currentEnroll = await Enroll.findOne({ refid: req.user._id }).sort({ createdAt: -1 });
+        console.log(currentEnroll);
 
         const timetable = await TimeTable.findOne({faculty : currentEnroll.faculty, semester : currentEnroll.semester, year : currentEnroll.acYear});
 
