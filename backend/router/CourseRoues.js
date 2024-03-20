@@ -1,5 +1,5 @@
 const express =require("express");
-const { CreateCourse, getAllCourses, getByIdCourse, updateCourse, deleteCourse } = require("../controller/CourseController");
+const { CreateCourse, getAllCourses, getByIdCourse, updateCourse, deleteCourse, getCourseBycode } = require("../controller/CourseController");
 const router = express.Router();
 
 
@@ -8,6 +8,7 @@ router.get("/",getAllCourses);
 router.get("/:courseid",getByIdCourse);
 router.patch("/:courseid",updateCourse)
 router.delete("/remove-course/:courceid",deleteCourse)
+router.get("/get-course/:coursecode",getCourseBycode)
 
 
 

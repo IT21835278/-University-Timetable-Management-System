@@ -139,11 +139,23 @@ const  deleteCourse = asyncHandler(async(req,res)=>{
     }
 })
 
+const getCourseBycode = asyncHandler(async(req,res)=>{
+    try{
+        const  course = Course.findOne({code:req.params.coursecode})
+
+        res.status(200).json(course)
+    }catch (error) {
+        console.error("Error occur getting course details using by code", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+})
+
 
 module.exports={
     CreateCourse,
     getAllCourses,
     getByIdCourse,
     updateCourse,
-    deleteCourse
+    deleteCourse,
+    getCourseBycode
 }
