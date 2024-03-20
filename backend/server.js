@@ -13,6 +13,7 @@ const CourseRoutes = require("./router/CourseRoues")
 const  TimeTableroutes =require("./router/TimetableRoutes")
 const  EnrollRoutes = require("./router/EnrollRoutes")
 const HallRouter = require("./router/HallRoutes")
+const  AnnousementRoutes = require("./router/AnnousementRoutes")
 
 
 const app = express();
@@ -39,6 +40,7 @@ app.use("/api/course",CourseRoutes)
 app.use("/api/time-table",TimeTableroutes)
 app.use("/api/enroll",EnrollRoutes)
 app.use("/api/hall", HallRouter)
+app.use("/api/annousement",AnnousementRoutes)
 
 
 
