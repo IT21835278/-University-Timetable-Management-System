@@ -65,6 +65,9 @@ const updateCourse = asyncHandler(async(req,res)=>{
             description,
             credit,
             faculty,
+            lecturer,
+            sesmester,
+            acYear
         } = cource
 
         cource.name = req.body.name || name
@@ -72,6 +75,9 @@ const updateCourse = asyncHandler(async(req,res)=>{
         cource.description = req.body.description || description
         cource.credit = req.body.credit || credit
         cource.faculty = req.body.faculty || faculty
+        cource.lecturer = req.body.lecturer || lecturer
+        cource.sesmester = req.body.sesmester || sesmester
+        cource.acYear = req.body.acYear || acYear
 
         const updateCourese = await cource.save()
         console.log(updateCourese);
@@ -85,9 +91,24 @@ const updateCourse = asyncHandler(async(req,res)=>{
 })
 
 
+const  deleteCourse = asyncHandler(async(req,res)=>{
+    try{
+        const  courceid = req.params.courceid
+        const deletecourse = await Course.deleteOne({_id:courceid});
+
+        res.status(202).json({message: "This cource deleted successfull"})
+
+    }catch (error) {
+        console.error("Error Delete:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+})
+
+
 module.exports={
     CreateCourse,
     getAllCourses,
     getByIdCourse,
-    updateCourse
+    updateCourse,
+    deleteCourse
 }

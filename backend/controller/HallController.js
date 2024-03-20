@@ -10,6 +10,7 @@ const createNewHall = asyncHandler(async(req,res)=>{
             hallName,
             capacity,
             typeofhall,
+            facilities
         } =req.body
     
         const  hallexsits = await Hall.findOne({hallName:hallName})
@@ -22,6 +23,7 @@ const createNewHall = asyncHandler(async(req,res)=>{
             hallName,
             capacity,
             typeofhall,
+            facilities
         })
 
         res.status(201).json(hall);
@@ -47,7 +49,47 @@ const getAllHalls = asyncHandler(async(req,res)=>{
 
 })
 
+const updateHall = asyncHandler(async(req,res)=>{
+    try{
+        const  hall = await Hall.findOne(req.params.hallid);
+
+        const {
+            hallName,
+            capacity,
+            typeofhall,
+            facilities
+        } =hall
+
+        hall.hallName = req.body.hallName || hallName
+        hall.capacity = req.body.capacity || capacity
+        hall.typeofhall = req.body.typeofhall || typeofhall
+        hall.facilities = req.body.facilities || facilities
+
+        const  updateHall = await hall.save()
+        console.log("Coure updated");
+        res.status(202).json(updateHall)
+        
+
+    }catch (error) {
+        console.error("Error occour Updating hall:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+})
+
+
+const  deleteHall =  asyncHandler(async(req,res)=>{
+    try{
+        const hallid = req.params.hallid
+        await deleteOne({_id:hallid})
+    }catch (error) {
+        console.error("Error occour Deleting hall:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+})
+
 module.exports = {
     createNewHall,
     getAllHalls,
+    updateHall,
+    deleteHall
 }

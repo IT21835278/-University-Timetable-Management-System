@@ -18,6 +18,10 @@ const HallSchema= mongoose.Schema(
             default:'none'
         },
 
+        facilities:[{
+            trype:String
+        }],
+
         
 
         monday:{
