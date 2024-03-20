@@ -3,6 +3,7 @@ const TimeTable = require("../models/TimeTableModel");
 const { json } = require("body-parser");
 const Hall = require("../models/HallModel");
 const Enroll = require("../models/EnrollModule");
+const Anousement = require("../models/AnousementModel");
 
 
 const createTimeTable = asyncHandler(async(req,res)=>{
@@ -203,6 +204,18 @@ const createTimeTable = asyncHandler(async(req,res)=>{
             friday
         })
         console.log("Time table created");
+
+
+        //anousement
+        await Anousement.create({
+            title:`New Time table assigned`,
+            anousement:`The ${faculty} - ${year}st year ${semester} addet to new time table. pleace check your new timetable.`,
+            semester:faculty,
+            acYear:year,
+            faculty:faculty
+    
+        })
+
         res.status(201).json(timetable);
 
     }catch (error) {
@@ -421,6 +434,16 @@ const deleteTimetable = asyncHandler(async(req,res)=>{
             );
         }
     }
+
+    //anousement
+    await Anousement.create({
+        title:`Time table removed`,
+        anousement:`The ${faculty} - ${year}st year ${semester} remove your time table. we will add to new timetable soon`,
+        semester:faculty,
+        acYear:year,
+        faculty:faculty
+
+    })
 
     await TimeTable.deleteOne({_id:tableid});
 
