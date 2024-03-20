@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Hall = require("../models/HallModel");
 const { json } = require("body-parser");
 const { models } = require("mongoose");
+const Anousement = require("../models/AnousementModel");
 
 
 const createNewHall = asyncHandler(async(req,res)=>{
