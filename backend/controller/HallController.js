@@ -80,6 +80,17 @@ const updateHall = asyncHandler(async(req,res)=>{
 const  deleteHall =  asyncHandler(async(req,res)=>{
     try{
         const hallid = req.params.hallid
+        const  hall = await Hall.findById(hallid)
+        //anousement
+        await Anousement.create({
+            title:`The ${hall.hallName} removed`,
+            anousement:`The ${hall.hallName} ${hall.typeofhall} hall removed. we will assignt new hall for ${hall.typeofhall} `,
+            semester:0,
+            acYear:0,
+            faculty:"all"
+    
+        })
+
         await deleteOne({_id:hallid})
     }catch (error) {
         console.error("Error occour Deleting hall:", error);
