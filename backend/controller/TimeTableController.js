@@ -268,6 +268,206 @@ const getUserSpecificTimetable =asyncHandler(async(req,res)=>{
 })
 
 
+const  updateTimeTable = asyncHandler(async(req,res)=>{
+    try{
+
+        const tableid = req.params.tableid;
+        const timetable = TimeTable.findById(tableid)
+
+        const {
+            faculty,
+            semester,
+            year,
+            monday,
+            tuesday,
+            wednesday,
+            thurseday,
+            friday
+        } = timetable
+
+        timetable.faculty = req.body.faculty || faculty
+        timetable.semester = req.body.semester || semester
+        timetable.year = req.body.year || year
+        timetable.monday = req.body.monday || monday
+        timetable.tuesday = req.body.tuesday || tuesday
+        timetable.wednesday = req.body.wednesday || wednesday
+        timetable.thurseday = req.body.thurseday || thurseday
+        timetable.friday = req.body.friday || friday
+
+        //monday
+        if(monday){
+            if (monday.details8_30to10_30 && monday.details8_30to10_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: monday.details8_30to10_30.hallId },
+                    { $set: { "monday.time8_30to10_30": true } }
+                );
+            }
+
+            if (monday.details10_30to12_30 && monday.details10_30to12_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: monday.details10_30to12_30.hallId },
+                    { $set: { "monday.time10_30to12_30": true } }
+                );
+            }
+
+            if (monday.details1_30to3_30 && monday.details1_30to3_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: monday.details1_30to3_30.hallId },
+                    { $set: { "monday.time1_30to3_30": true } }
+                );
+            }
+
+            if (monday.details3_30to5_30 && monday.details3_30to5_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: monday.details3_30to5_30.hallId },
+                    { $set: { "monday.time3_30to5_30": true } }
+                );
+            }
+        }
+
+
+        //tuesday
+        if(tuesday){
+            if (tuesday.details8_30to10_30 && tuesday.details8_30to10_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: tuesday.details8_30to10_30.hallId },
+                    { $set: { "tuesday.time8_30to10_30": true } }
+                );
+            }
+
+            if (tuesday.details10_30to12_30 && tuesday.details10_30to12_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: tuesday.details10_30to12_30.hallId },
+                    { $set: { "tuesday.time10_30to12_30": true } }
+                );
+            }
+
+            if (tuesday.details1_30to3_30 && tuesday.details1_30to3_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: tuesday.details1_30to3_30.hallId },
+                    { $set: { "tuesday.time1_30to3_30": true } }
+                );
+            }
+
+            if (tuesday.details3_30to5_30 && tuesday.details3_30to5_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: tuesday.details3_30to5_30.hallId },
+                    { $set: { "tuesday.time3_30to5_30": true } }
+                );
+            }
+    }
+
+
+        //wednesday
+        if(wednesday){
+            if (wednesday.details8_30to10_30 && wednesday.details8_30to10_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: wednesday.details8_30to10_30.hallId },
+                    { $set: { "wednesday.time8_30to10_30": true } }
+                );
+            }
+
+            if (wednesday.details10_30to12_30 && wednesday.details10_30to12_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: wednesday.details10_30to12_30.hallId },
+                    { $set: { "wednesday.time10_30to12_30": true } }
+                );
+            }
+
+            if (wednesday.details1_30to3_30 && wednesday.details1_30to3_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: wednesday.details1_30to3_30.hallId },
+                    { $set: { "wednesday.time1_30to3_30": true } }
+                );
+            }
+
+            if (wednesday.details3_30to5_30 && wednesday.details3_30to5_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: wednesday.details3_30to5_30.hallId },
+                    { $set: { "wednesday.time3_30to5_30": true } }
+                );
+            }
+        }
+
+
+
+            //thurseday
+        if(thurseday){
+            if (thurseday.details8_30to10_30 && thurseday.details8_30to10_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: thurseday.details8_30to10_30.hallId },
+                    { $set: { "thurseday.time8_30to10_30": true } }
+                );
+            }
+
+            if (thurseday.details10_30to12_30 && thurseday.details10_30to12_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: thurseday.details10_30to12_30.hallId },
+                    { $set: { "thurseday.time10_30to12_30": true } }
+                );
+            }
+
+            if (thurseday.details1_30to3_30 && thurseday.details1_30to3_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: thurseday.details1_30to3_30.hallId },
+                    { $set: { "thurseday.time1_30to3_30": true } }
+                );
+            }
+
+            if (thurseday.details3_30to5_30 && thurseday.details3_30to5_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: thurseday.details3_30to5_30.hallId },
+                    { $set: { "thurseday.time3_30to5_30": true } }
+                );
+            }
+        }
+        
+
+
+
+        //friday
+        if(friday){
+            if (friday.details8_30to10_30 && friday.details8_30to10_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: friday.details8_30to10_30.hallId },
+                    { $set: { "friday.time8_30to10_30": true } }
+                );
+            }
+
+            if (friday.details10_30to12_30 && friday.details10_30to12_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: friday.details10_30to12_30.hallId },
+                    { $set: { "friday.time10_30to12_30": true } }
+                );
+            }
+
+            if (friday.details1_30to3_30 && friday.details1_30to3_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: friday.details1_30to3_30.hallId },
+                    { $set: { "friday.time1_30to3_30": true } }
+                );
+            }
+
+            if (friday.details3_30to5_30 && friday.details3_30to5_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: friday.details3_30to5_30.hallId },
+                    { $set: { "friday.time3_30to5_30": true } }
+                );
+            }
+        }
+
+        const updatetable = await timetable.save()
+        res.status(200).json(updatetable);
+
+
+
+    }catch (error) {
+    console.error("Error occur get by id time tables:", error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+})
+
+
 
 
 //time table delete
