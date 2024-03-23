@@ -19,7 +19,7 @@ const createTimeTable = asyncHandler(async(req,res)=>{
             friday
         } = req.body
 
-        const timeTableExist = await TimeTable.findOne({faculty,semester,year});
+        const timeTableExist = await TimeTable.findOne({faculty:faculty,semester:semester,year:year});
         console.log(timeTableExist);
         if(timeTableExist){
             res.status(400);
@@ -210,7 +210,7 @@ const createTimeTable = asyncHandler(async(req,res)=>{
         await Anousement.create({
             title:`New Time table assigned`,
             anousement:`The ${faculty} - ${year}st year ${semester} addet to new time table. pleace check your new timetable.`,
-            semester:faculty,
+            semester:semester,
             acYear:year,
             faculty:faculty
     
@@ -470,188 +470,240 @@ const  updateTimeTable = asyncHandler(async(req,res)=>{
 
 
 
-//time table delete
+//time table deletet
 const deleteTimetable = asyncHandler(async(req,res)=>{
-    const tableid = req.params.tableid
-    const timetable = await TimeTable.findById(tableid);
-
-    if(timetable.monday){
-        if (timetable.monday.details8_30to10_30 && timetable.monday.details8_30to10_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.monday.details8_30to10_30.hallId },
-                { $set: { "monday.time8_30to10_30": false } }
-            );
+    try{
+        const tableid = req.params.tableid
+        const timetable = await TimeTable.findById(tableid);
+    
+        if(timetable.monday){
+            if (timetable.monday.details8_30to10_30 && timetable.monday.details8_30to10_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.monday.details8_30to10_30.hallId },
+                    { $set: { "monday.time8_30to10_30": false } }
+                );
+            }
+    
+            if (timetable.monday.details10_30to12_30 && timetable.monday.details10_30to12_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.monday.details10_30to12_30.hallId },
+                    { $set: { "monday.time10_30to12_30": false } }
+                );
+            }
+    
+            if (timetable.monday.details1_30to3_30 && timetable.monday.details1_30to3_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.monday.details1_30to3_30.hallId },
+                    { $set: { "monday.time1_30to3_30": false } }
+                );
+            }
+    
+            if (timetable.monday.details3_30to5_30 && timetable.monday.details3_30to5_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.monday.details3_30to5_30.hallId },
+                    { $set: { "monday.time3_30to5_30": false } }
+                );
+            }
         }
-
-        if (timetable.monday.details10_30to12_30 && timetable.monday.details10_30to12_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.monday.details10_30to12_30.hallId },
-                { $set: { "monday.time10_30to12_30": false } }
-            );
-        }
-
-        if (timetable.monday.details1_30to3_30 && timetable.monday.details1_30to3_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.monday.details1_30to3_30.hallId },
-                { $set: { "monday.time1_30to3_30": false } }
-            );
-        }
-
-        if (timetable.monday.details3_30to5_30 && timetable.monday.details3_30to5_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.monday.details3_30to5_30.hallId },
-                { $set: { "monday.time3_30to5_30": false } }
-            );
-        }
-    }
-
-
-    //tuesday
-    if(timetable.tuesday){
-        if (timetable.tuesday.details8_30to10_30 && timetable.tuesday.details8_30to10_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.tuesday.details8_30to10_30.hallId },
-                { $set: { "tuesday.time8_30to10_30": false } }
-            );
-        }
-
-        if (timetable.tuesday.details10_30to12_30 && timetable.tuesday.details10_30to12_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.tuesday.details10_30to12_30.hallId },
-                { $set: { "tuesday.time10_30to12_30": false } }
-            );
-        }
-
-        if (timetable.tuesday.details1_30to3_30 && timetable.tuesday.details1_30to3_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.tuesday.details1_30to3_30.hallId },
-                { $set: { "tuesday.time1_30to3_30": false } }
-            );
-        }
-
-        if (timetable.tuesday.details3_30to5_30 && timetable.tuesday.details3_30to5_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.tuesday.details3_30to5_30.hallId },
-                { $set: { "tuesday.time3_30to5_30": false } }
-            );
-        }
-}
-
-
-    //wednesday
-    if(timetable.wednesday){
-        if (timetable.wednesday.details8_30to10_30 && timetable.wednesday.details8_30to10_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.wednesday.details8_30to10_30.hallId },
-                { $set: { "wednesday.time8_30to10_30": false } }
-            );
-        }
-
-        if (timetable.wednesday.details10_30to12_30 && timetable.wednesday.details10_30to12_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.wednesday.details10_30to12_30.hallId },
-                { $set: { "wednesday.time10_30to12_30": false } }
-            );
-        }
-
-        if (timetable.wednesday.details1_30to3_30 && timetable.wednesday.details1_30to3_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.wednesday.details1_30to3_30.hallId },
-                { $set: { "wednesday.time1_30to3_30": false } }
-            );
-        }
-
-        if (timetable.wednesday.details3_30to5_30 && timetable.wednesday.details3_30to5_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.wednesday.details3_30to5_30.hallId },
-                { $set: { "wednesday.time3_30to5_30": false } }
-            );
-        }
-    }
-
-
-
-        //thurseday
-    if(timetable.thurseday){
-        if (timetable.thurseday.details8_30to10_30 && timetable.thurseday.details8_30to10_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.thurseday.details8_30to10_30.hallId },
-                { $set: { "thurseday.time8_30to10_30": false } }
-            );
-        }
-
-        if (timetable.thurseday.details10_30to12_30 && timetable.thurseday.details10_30to12_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.thurseday.details10_30to12_30.hallId },
-                { $set: { "thurseday.time10_30to12_30": false } }
-            );
-        }
-
-        if (timetable.thurseday.details1_30to3_30 && timetable.thurseday.details1_30to3_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.thurseday.details1_30to3_30.hallId },
-                { $set: { "thurseday.time1_30to3_30": false } }
-            );
-        }
-
-        if (timetable.thurseday.details3_30to5_30 && timetable.thurseday.details3_30to5_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.thurseday.details3_30to5_30.hallId },
-                { $set: { "thurseday.time3_30to5_30": false } }
-            );
-        }
+    
+    
+        //tuesday
+        if(timetable.tuesday){
+            if (timetable.tuesday.details8_30to10_30 && timetable.tuesday.details8_30to10_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.tuesday.details8_30to10_30.hallId },
+                    { $set: { "tuesday.time8_30to10_30": false } }
+                );
+            }
+    
+            if (timetable.tuesday.details10_30to12_30 && timetable.tuesday.details10_30to12_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.tuesday.details10_30to12_30.hallId },
+                    { $set: { "tuesday.time10_30to12_30": false } }
+                );
+            }
+    
+            if (timetable.tuesday.details1_30to3_30 && timetable.tuesday.details1_30to3_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.tuesday.details1_30to3_30.hallId },
+                    { $set: { "tuesday.time1_30to3_30": false } }
+                );
+            }
+    
+            if (timetable.tuesday.details3_30to5_30 && timetable.tuesday.details3_30to5_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.tuesday.details3_30to5_30.hallId },
+                    { $set: { "tuesday.time3_30to5_30": false } }
+                );
+            }
     }
     
-
-
-
-    //friday
-    if(timetable.friday){
-        if (timetable.friday.details8_30to10_30 && timetable.friday.details8_30to10_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.friday.details8_30to10_30.hallId },
-                { $set: { "friday.time8_30to10_30": false } }
-            );
+    
+        //wednesday
+        if(timetable.wednesday){
+            if (timetable.wednesday.details8_30to10_30 && timetable.wednesday.details8_30to10_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.wednesday.details8_30to10_30.hallId },
+                    { $set: { "wednesday.time8_30to10_30": false } }
+                );
+            }
+    
+            if (timetable.wednesday.details10_30to12_30 && timetable.wednesday.details10_30to12_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.wednesday.details10_30to12_30.hallId },
+                    { $set: { "wednesday.time10_30to12_30": false } }
+                );
+            }
+    
+            if (timetable.wednesday.details1_30to3_30 && timetable.wednesday.details1_30to3_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.wednesday.details1_30to3_30.hallId },
+                    { $set: { "wednesday.time1_30to3_30": false } }
+                );
+            }
+    
+            if (timetable.wednesday.details3_30to5_30 && timetable.wednesday.details3_30to5_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.wednesday.details3_30to5_30.hallId },
+                    { $set: { "wednesday.time3_30to5_30": false } }
+                );
+            }
         }
-
-        if (timetable.friday.details10_30to12_30 && timetable.friday.details10_30to12_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.friday.details10_30to12_30.hallId },
-                { $set: { "friday.time10_30to12_30": false } }
-            );
+    
+    
+    
+            //thurseday
+        if(timetable.thurseday){
+            if (timetable.thurseday.details8_30to10_30 && timetable.thurseday.details8_30to10_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.thurseday.details8_30to10_30.hallId },
+                    { $set: { "thurseday.time8_30to10_30": false } }
+                );
+            }
+    
+            if (timetable.thurseday.details10_30to12_30 && timetable.thurseday.details10_30to12_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.thurseday.details10_30to12_30.hallId },
+                    { $set: { "thurseday.time10_30to12_30": false } }
+                );
+            }
+    
+            if (timetable.thurseday.details1_30to3_30 && timetable.thurseday.details1_30to3_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.thurseday.details1_30to3_30.hallId },
+                    { $set: { "thurseday.time1_30to3_30": false } }
+                );
+            }
+    
+            if (timetable.thurseday.details3_30to5_30 && timetable.thurseday.details3_30to5_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.thurseday.details3_30to5_30.hallId },
+                    { $set: { "thurseday.time3_30to5_30": false } }
+                );
+            }
         }
-
-        if (timetable.friday.details1_30to3_30 && timetable.friday.details1_30to3_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: friday.details1_30to3_30.hallId },
-                { $set: { "friday.time1_30to3_30": false } }
-            );
+        
+    
+    
+    
+        //friday
+        if(timetable.friday){
+            if (timetable.friday.details8_30to10_30 && timetable.friday.details8_30to10_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.friday.details8_30to10_30.hallId },
+                    { $set: { "friday.time8_30to10_30": false } }
+                );
+            }
+    
+            if (timetable.friday.details10_30to12_30 && timetable.friday.details10_30to12_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.friday.details10_30to12_30.hallId },
+                    { $set: { "friday.time10_30to12_30": false } }
+                );
+            }
+    
+            if (timetable.friday.details1_30to3_30 && timetable.friday.details1_30to3_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: friday.details1_30to3_30.hallId },
+                    { $set: { "friday.time1_30to3_30": false } }
+                );
+            }
+    
+            if (timetable.friday.details3_30to5_30 && timetable.friday.details3_30to5_30.hallId) {
+                await Hall.findOneAndUpdate(
+                    { hallName: timetable.friday.details3_30to5_30.hallId },
+                    { $set: { "friday.time3_30to5_30": false } }
+                );
+            }
         }
-
-        if (timetable.friday.details3_30to5_30 && timetable.friday.details3_30to5_30.hallId) {
-            await Hall.findOneAndUpdate(
-                { hallName: timetable.friday.details3_30to5_30.hallId },
-                { $set: { "friday.time3_30to5_30": false } }
-            );
+    
+        //anousement
+        await Anousement.create({
+            title:`Time table removed`,
+            anousement:`The ${timetable.faculty} - ${timetable.year}st year ${timetable.semester} remove your time table. we will add to new timetable soon`,
+            semester:timetable.semester,
+            acYear:timetable.year,
+            faculty:timetable.faculty
+    
+        })
+    
+        await TimeTable.deleteOne({_id:tableid});
+    
+        res.status(200).json({message: "Time table deleted Successful"})
+    }catch (error) {
+        console.error("Error occur deleting time tables:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
         }
-    }
-
-    //anousement
-    await Anousement.create({
-        title:`Time table removed`,
-        anousement:`The ${faculty} - ${year}st year ${semester} remove your time table. we will add to new timetable soon`,
-        semester:faculty,
-        acYear:year,
-        faculty:faculty
-
-    })
-
-    await TimeTable.deleteOne({_id:tableid});
-
-    res.status(200).json({message: "Time table deleted Successful"})
+   
 
 
 })
+
+
+// const deleteTimetable = asyncHandler(async (req, res) => {
+//     const tableid = req.params.tableid;
+//     const timetable = await TimeTable.findById(tableid);
+
+//     if (!timetable) {
+//         return res.status(404).json({ message: "Timetable not found" });
+//     }
+
+//     // Update hall availability based on timetable slots
+//     const updateHall = async (day, timeSlot) => {
+//         if (timetable[day] && timetable[day][timeSlot] && timetable[day][timeSlot].hallId) {
+//             const hallId = timetable[day][timeSlot].hallId;
+//             await Hall.findOneAndUpdate(
+//                 { hallName: hallId },
+//                 { $set: { [`${day}.${timeSlot}`]: false } }
+//             );
+//         }
+//     };
+
+//     const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+//     const timeSlots = ['details8_30to10_30', 'details10_30to12_30', 'details1_30to3_30', 'details3_30to5_30'];
+
+//     for (const day of days) {
+//         for (const timeSlot of timeSlots) {
+//             await updateHall(day, timeSlot);
+//         }
+//     }
+
+//     // Create announcement
+//     const { faculty, year, semester } = timetable;
+//     await Anouncement.create({
+//         title: `Timetable removed`,
+//         anouncement: `The ${faculty} - ${year}st year ${semester} timetable has been removed. We will add a new timetable soon.`,
+//         semester: faculty,
+//         acYear: year,
+//         faculty: faculty
+//     });
+
+//     // Delete timetable
+//     await TimeTable.deleteOne({ _id: tableid });
+
+//     res.status(200).json({ message: "Timetable deleted successfully" });
+// });
+
 
 
 module.exports = {

@@ -7,8 +7,8 @@ const router = express.Router();
 router.post("/",createAnousement);
 router.get("/",getAllAnousement);
 router.get("/user-annousement",protect,getUserSpecificAnnousement)
-router.get("/get-annousement/:annousementid",getAllFacultyAnnousement)
-router.delete("/",removeAnnousement)
+router.get("/get-annousement",getAllFacultyAnnousement)
+router.delete("/:annousementid",removeAnnousement)
 
 
 

@@ -52,7 +52,7 @@ const getAllHalls = asyncHandler(async(req,res)=>{
 
 const updateHall = asyncHandler(async(req,res)=>{
     try{
-        const  hall = await Hall.findOne(req.params.hallid);
+        const  hall = await Hall.findById(req.params.hallid);
 
         const {
             hallName,
@@ -92,7 +92,8 @@ const  deleteHall =  asyncHandler(async(req,res)=>{
     
         })
 
-        await deleteOne({_id:hallid})
+        await Hall.deleteOne({_id:hallid})
+        res.status(202).json({message:"Hall deleted Successfull"})
     }catch (error) {
         console.error("Error occour Deleting hall:", error);
         res.status(500).json({ success: false, error: "Internal Server Error" });

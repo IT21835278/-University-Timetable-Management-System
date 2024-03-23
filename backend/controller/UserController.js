@@ -232,8 +232,15 @@ const getUserById = asyncHandler(async(req,res)=>{
 //     }
 // })
 
+const  deleteUser =asyncHandler(async(req,res)=>{
+    try{
+        await User.deleteOne({_id:req.params.userid});
+        res.status(202).json({message:"Delete user Success full"})
 
-
+    }catch(error){
+        res.status(500).json({message:"Do not have any details"})
+    }
+})
 
 
 module.exports = {
@@ -242,5 +249,6 @@ module.exports = {
     logout,
     getAllUser,
     getUserById,
+    deleteUser
     
 }
