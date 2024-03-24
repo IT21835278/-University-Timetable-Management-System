@@ -1,0 +1,52 @@
+config:
+  target: http://localhost:5000
+  phases:
+    - duration: 300
+      arrivalRate: 1
+      name: Warm up phase
+    - duration: 600
+      arrivalRate: 5
+      rampTo: 10
+      name: Ramp up load
+    - duration: 300
+      arrivalRate: 10
+      rampTo: 20
+      name: Spike phase
+  plugins:
+    ensure: {}
+    apdex: {}
+    metrics-by-endpoint: {}
+  apdex:
+    threshold: 100
+  ensure:
+    thresholds:
+      - http.response_time.p99 <= 500
+      - http.response_time.mean <= 300
+      - http.status.2xx >= 95
+
+scenarios:
+  - flow:
+      - post:
+          url: "/api/course"
+          json:
+            name: "New Course"
+            code: "COURSE001"  
+            description: "Description of the new course"
+            credit: 3
+            faculty: "Faculty Name"
+            lecturer: ["Lecturer 1", "Lecturer 2"]
+            semester: "Spring 2024"
+            acYear: "2024"
+      - get:
+          url: "/api/course"   
+      - get:
+          url: "/api/course/65e9efebb475a14a5ca5b512"   
+      - patch:
+          url: "/api/course/65e9efebb475a14a5ca5b512"   
+          json:
+            name: "Updated Course Name"
+            description: "Updated description"
+      - delete:
+          url: "/api/course/65e9efebb475a14a5ca5b512"   
+      - get:
+          url: "/api/course/get-course/COURSE001" 
