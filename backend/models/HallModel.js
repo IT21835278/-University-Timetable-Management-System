@@ -19,7 +19,7 @@ const HallSchema= mongoose.Schema(
         },
 
         facilities:[{
-            trype:String
+            type:String
         }],
 
         

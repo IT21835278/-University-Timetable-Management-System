@@ -624,7 +624,7 @@ const deleteTimetable = asyncHandler(async(req,res)=>{
     
             if (timetable.friday.details1_30to3_30 && timetable.friday.details1_30to3_30.hallId) {
                 await Hall.findOneAndUpdate(
-                    { hallName: friday.details1_30to3_30.hallId },
+                    { hallName: timetable.friday.details1_30to3_30.hallId },
                     { $set: { "friday.time1_30to3_30": false } }
                 );
             }

@@ -37,6 +37,33 @@ const EnrollCourse = asyncHandler(async(req,res)=>{
     }
 })
 
+const  updateEnroll = asyncHandler(async(req,res)=>{
+    try{
+        const enroll = await Enroll.findById(req.params.enrollid);
+
+        const {
+            Sid,
+            semester,
+            acYear,
+            faculty
+        } = enroll
+
+        enroll.Sid = req.body.Sid || Sid
+        enroll.semester = req.body.semester || semester
+        enroll.acYear = req.body.acYear || acYear
+        enroll.faculty = req.body.faculty || faculty
+        
+
+        const updateenroll = await enroll.save()
+        res.status(202).json(updateenroll);
+
+
+    }catch (error) {
+        console.error("Error occour Enrool update the course:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+})
+
 const getAllEnroll = asyncHandler(async(req,res)=>{
     try{
         const enroll = await Enroll.find();
@@ -72,4 +99,5 @@ module.exports={
     EnrollCourse,
     getAllEnroll,
     deleteEnrollmennt,
+    updateEnroll
 }
