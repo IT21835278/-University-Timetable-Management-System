@@ -4,6 +4,7 @@ import AddCourse from "./pages/Admin/AddCourse";
 import CourseTable from "./pages/Admin/CourseTable";
 import CourseUpdate from "./pages/Admin/CourseUpdate";
 import Createtimetable from "./pages/Admin/time-table/create-timetable";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (

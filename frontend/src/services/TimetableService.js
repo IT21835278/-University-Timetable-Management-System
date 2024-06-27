@@ -3,7 +3,7 @@ import {toast} from "react-toastify"
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
 
-export const CreateTimeTable = async(formData)=>{
+export const AddTimeTable = async(formData)=>{
     try{
         const responce = await axios.post(`${BACKEND_URL}/api/time-table`,formData)
         if(responce.statusText ==="OK"){
